@@ -3,40 +3,61 @@ import UIKit
 class ViewController: UIViewController
 {
     // Outlets
-    @IBOutlet weak var oTtitleView: UIView!
+    @IBOutlet weak var tSVTitle: UIView!
+    @IBOutlet weak var tSVButtons: UIView!
+    @IBOutlet weak var tSBStartButton: UIButton!
     // On-load variables; these are unaffected by prior gameplay
+    final var SCHMOOVE = 850 as CGFloat
     var rCGameState = gameState.load
+    
     // Game variables; these are affected by prior play
+    
+    
+    /* VDL */
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Prelaunch gimmiks, nothing too interesting
-        oTtitleView.layer.position.y += 400
-        // Actual viewDidLoad-ing
+        tSVTitle.layer.position.y += SCHMOOVE
+        tSVButtons.layer.position.y += SCHMOOVE
+        tSBStartButton.layer.cornerRadius = 14
+        // Actual VDL-ing
         view.backgroundColor = #colorLiteral(red: 0.1785255671, green: 0.2509605885, blue: 0.3888639212, alpha: 0.2451371173)
         UIView.animate(withDuration: 1, delay: 0.13, options: .curveEaseOut, animations:
             {
-                self.view.backgroundColor = #colorLiteral(red: 0.6824293137, green: 1, blue: 0.8976086378, alpha: 1)
+                self.view.backgroundColor = #colorLiteral(red: 0.8256772757, green: 0.9965962768, blue: 0.9430112839, alpha: 1)
             }
           , completion:
             {
                 _ in
-                self.view.backgroundColor = #colorLiteral(red: 0.6335143447, green: 1, blue: 0.8671106696, alpha: 1)
-                self.AMstartScreen()
+                self.view.backgroundColor = #colorLiteral(red: 0.8256772757, green: 0.9965962768, blue: 0.9430112839, alpha: 1)
+                self.AMStartScreen()
             }
         )
     }
     // View did load ends; begin functions.
-    func AMstartScreen()
+    func AMStartScreen()
     {
         rCGameState = .startScreen
         UIView.animate(withDuration: 2, delay: 0.13, options: .curveEaseOut, animations:
             {
-            self.oTtitleView.layer.position.y -= 400
+            self.tSVTitle.layer.position.y -= self.SCHMOOVE
             }
           , completion:
             {
                 _ in
+                do{
+                    UIView.animate(withDuration: 1.5, delay: 0.13, options: .curveEaseOut, animations:
+                        {
+                        self.tSVButtons.layer.position.y -= self.SCHMOOVE
+                        }
+                      , completion:
+                        {
+                            _ in
+                        }
+                    )
+                }
             }
         )
     }
